@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note App</title>
+
+    <!-- VUE SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Milligram -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css" integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g==" crossorigin="anonymous" />
+
+    <!-- Bootstrap -->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
+
+    <!-- OUR CUSTOM CODE -->
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--We are making two "pages" essentially--one where you have a login screen and one which is the page after you login-->
+
+<!-- This is the div that contains the information when you login-->
+<div id="app">
+    <h1 id="title">narz<span>Nts</span></h1>
+
+    <!--This is the div that makes it visible for people to login and/or create an account-->
+    <div id="nologin" v-if="!loggedin">
+        <div id="loginform">
+            <form v-on:submit.prevent="handleLogin">
+                <fieldset><legend>LOGIN</legend>
+                <input type="text" placeholder="username" v-model="loginUN">
+                <input type="password" placeholder="password" v-model="loginPW">
+                <button v-on:click="handleLogin">Login</button>
+                </fieldset>
+            </form>
+
+            <form v-on:submit.prevent="handleSignup">
+                <fieldset><legend>CREATE USER</legend>
+                    <input type="text" placeholder="username" v-model="createUN">
+                    <input type="password" placeholder="password" v-model="createPW">
+                    <button v-on:click="handleSignup">Create Account</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <!--This is the div that will be shown when the user is logged-->
+    <div id="login" v-if="loggedin">
+
+        <div id="forms">
+            <!--This is the div that will show the notes-->
+            <article>
+                <h1>New Note</h1>
+                <input type="text" v-model="newNote">
+                <button v-on:click.prevent="createNote">Create Note</button>
+            </article>
+
+            <!--Form that populates with the old note to update it-->
+            <article>
+                <h1>Update Note</h1>
+                <input type="text" v-model="updateNote">
+                <button v-on:click.prevent="editNote" v-bind:id="editID">Update Note</button>
+            </article>
+        </div>
+
+        <!--Lists all the notes for that user-->
+        <div id="notes">
+            <div class="note" v-for="note of notes">
+                <h1>{{note.message}}</h1>
+                <button v-bind:id='note.id' v-on:click="deleteNote">Delete</button><button v-bind:id='note.id' v-on:click="editSelect">Update</button>
+            </div>
+        </div>
+
+
+        <!--Logout button-->
+        <button v-on:click="handleLogout" id="logout">Log out</button>
+    </div>
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+#title {
+    text-align: center;
+    margin: 50px auto;
+}
+
+#title span {
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+#loginform {
+    display: flex;
+    width: 60%;
+    margin: 10px auto;
+}
+
+#forms {
+    width: 60%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#notes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 20px auto;
+}
+
+#notes div {
+    margin: 15px;
+    max-width: 300px;
+    padding: 10px;
+    border: 2px solid cornflowerblue;
+}
+
+#logout {
+    display: block;
+    margin: 10px auto;
+}
